@@ -8,5 +8,5 @@
 <script setup>
 let mainPage = ref(false)
 
-mainPage.value = window.location.hostname.split(".").length
+mainPage.value = window.location.hostname.split(".").length >= 3
 </script>
