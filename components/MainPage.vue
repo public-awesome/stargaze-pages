@@ -6,7 +6,7 @@
             <p class="text-zinc-300 my-4 text-center text-xl ">Stargaze Pages</p>
         </div>
         <div class="w-screen max-w-auto  flex flex-col items-center justify-center p-2 ">
-            <a href="'https://stargaze.zone/names"
+            <a href="https://stargaze.zone/names"
                 class="bg-[#db2777] w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-[#be185d] transition-colors">
                 <svg class="h-6 w-6" width="180" height="180" viewBox="0 0 180 180" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +22,7 @@
                 </p>
             </a>
 
-            <a href="'https://discord.gg/stargaze"
+            <a href="https://discord.gg/stargaze"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
                 <svg class="h-6 w-6" width="256px" height="256px" viewBox="0 -28.5 256 256" version="1.1"
                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
