@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
     modules: ['@nuxtjs/tailwindcss'],
-    ssr: false,
+    ssr: true,
     target: "static",
     mode: "ssr",
 
