@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col justify-between h-screen items-center bg-black">
+    <div v-if="nameInfo" class="flex flex-col justify-between h-screen items-center bg-black">
         <div class="w-screen max-w-auto h-full  flex flex-col items-center justify-center p-2 ">
             <a v-if="imageNftLink" :href="imageNftLink" class="m-4"><img :src="imagePictureUrl"
                     class="w-48 rounded-md " /></a>
@@ -129,7 +129,53 @@
             </a>
         </div>
     </div>
+<div class="flex flex-col justify-between h-screen items-center bg-black" v-else>
+    <div class="w-screen max-w-auto h-full  flex flex-col items-center justify-center p-2 ">
+           <img src="~/assets/sad-face.svg"
+                    class="w-48 rounded-md m-4" />
+            <div
+                class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
+                No name found</div>
+         
 
+            <a 
+                href="https://stargaze.zone/names"
+                class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
+
+                <svg class="h-6 w-6" width="180" height="180" viewBox="0 0 180 180" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M90 172C135.287 172 172 135.287 172 90C172 44.7127 135.287 8 90 8C44.7127 8 8 44.7127 8 90C8 135.287 44.7127 172 90 172ZM180 90C180 139.706 139.706 180 90 180C40.2944 180 0 139.706 0 90C0 40.2944 40.2944 0 90 0C139.706 0 180 40.2944 180 90Z"
+                        fill="white" />
+                    <path
+                        d="M106.69 22.47L110.32 72.88L159.38 85L112.56 104.03L116.19 154.44L83.6301 115.79L36.8101 134.83L63.5001 91.91L30.9301 53.26L79.9901 65.39L106.69 22.47Z"
+                        fill="white" />
+                </svg>
+
+                <p class="w-full"> Register "{{stargazeName}}" on Stargaze</p>
+            </a>
+
+
+        </div>
+        <div class="m-4 text-center">
+            <p class="text-zinc-400 my-1 text-center">Made with 💜 by </p>
+            <a href="https://stargaze.zone"><svg width="124" height="30" viewBox="0 0 124 30" fill="none"
+                    xmlns="http://www.w3.org/2000/svg" class="justify-self-end">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M8.51686 8.22623H13.9122V3.0142H8.61996C3.36208 2.87042 2.50295 3.7331 2.36058 9.5562V11.0299C2.29676 16.242 3.36208 17.7157 7.24535 17.6079H8.20757V21.7775H2.46858V26.9895H8.17321C12.297 26.9895 12.572 26.9177 13.6029 25.6596C14.2902 24.5093 14.4277 23.7545 14.5308 20.2319V18.7581C14.5308 13.6899 13.4998 12.324 9.61655 12.3959H8.51686V8.22623ZM24.1531 8.22615H26.9367V3.01412H15.2182V8.22615H18.0018V26.9895H24.1531V8.22615ZM34.4232 26.9895H28.2718V7.90264C28.3405 3.66113 29.1309 3.01412 34.4624 3.01412H36.9711C42.2977 3.01412 43.0881 3.62518 43.1568 7.90264V26.9895H37.0055V21.9212H34.4281V26.9895H34.4232ZM37.0006 16.6013V10.275C37.0006 8.72938 36.5882 8.04642 35.6947 8.04642C34.8012 8.04642 34.4232 8.76532 34.4232 10.275V16.6013H37.0006ZM60.2658 7.65099C60.094 3.51731 59.338 2.90625 54.7674 3.01408H45.3857V26.9894H51.5371V17.6078H52.3275C53.6333 17.6437 54.1488 18.2548 54.1145 19.7645V22.9636C54.1145 24.653 54.2519 25.947 54.5956 26.9894H60.7469C60.472 25.983 60.2658 24.5452 60.2658 22.9636V19.2612C60.3346 16.5654 59.4754 15.4151 56.898 14.6962C59.4754 14.4805 60.3689 12.9709 60.2658 9.19663V7.65099ZM54.1488 10.3469C54.1488 12.0363 53.8395 12.3957 52.3962 12.3957H51.5371V8.22611H52.3962C53.7021 8.22611 54.1488 8.76529 54.1488 10.3469ZM77.1443 21.6697C77.213 26.4503 76.4914 27.0974 71.0617 26.9895H68.5186C62.6765 27.0614 62.2642 26.6301 62.3329 20.5194L62.2985 18.6503V11.4613C62.3623 3.66119 62.8778 2.97823 68.5137 3.01418H77.1394V8.90916C76.4177 8.54971 74.6995 8.2981 72.6719 8.22621H70.5069C68.6168 8.22621 68.445 8.40593 68.445 10.4189V18.9378C68.4106 21.454 68.5824 21.7415 69.9914 21.7775H70.988V15.9903C70.988 15.0198 70.8162 14.1931 70.5069 13.2945H77.1394V21.6697H77.1443ZM79.2356 26.9895H85.3869V21.9212H87.9643V26.9895H94.1157V7.90264C94.047 3.62518 93.2566 3.01412 87.93 3.01412H85.4213C80.0947 3.01412 79.3043 3.66113 79.2356 7.90264V26.9895ZM87.9643 10.275V16.6013H85.3869V10.275C85.3869 8.76532 85.765 8.04642 86.6585 8.04642C87.552 8.04642 87.9643 8.72938 87.9643 10.275ZM108.137 3.01412L103.016 21.7774H108.515L107.827 26.9895H95.5246L100.714 8.22615H95.5934L96.315 3.01412H108.137ZM115.972 8.2261H121.642V3.01406H115.903C110.542 2.94217 109.958 3.66108 109.821 10.7063V18.3626C109.786 21.8852 110.061 24.4733 110.542 25.3C111.47 26.8456 111.814 26.9535 115.903 26.9894H121.642V21.7774H115.972V17.6077H121.642V12.3957H115.972V8.2261Z"
+                        fill="url(#paint0_linear_88_123)" />
+                    <defs>
+                        <linearGradient id="paint0_linear_88_123" x1="2.47665" y1="-1.09231" x2="127.568" y2="16.8828"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FFF59E" />
+                            <stop offset="0.635417" stop-color="#81EFD9" />
+                            <stop offset="1" stop-color="#6B9BE3" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </a>
+        </div>
+</div>
 </template>
 <script setup>
 
@@ -140,9 +186,10 @@ let stargazeName = ref(host.value.split(".")[0])
 let lcdEndpoint = 'https://rest.stargaze-apis.com';
 let ipfsGateway = 'https://ipfs.stargaze.zone/ipfs/'
 let nameInfo = ref(await SGNames.fetchNameInfo(stargazeName.value))
-
+if(nameInfo.value){
 nameInfo.value.name = nameInfo.value?nameInfo.value.name[0].toUpperCase() + nameInfo.value.name.slice(1):""
-let imageNft = nameInfo.value.imageNFT
+}
+let imageNft = nameInfo?.value?.imageNFT
 let imageNftInfo = nameInfo.value?await _queryNameContract(nameInfo.value.imageNFT.collection, {
     "all_nft_info": {
         "token_id": imageNft.token_id
@@ -152,7 +199,7 @@ let imageMetaUrlRaw = imageNftInfo ? imageNftInfo.data.info.token_uri : null
 let imageNftLink = ref(imageNftInfo ? "https://stargaze.zone/media/" + imageNft.collection + "/" + imageNft.token_id : null)
 let imageMetaUrl = prefixToGateway(imageMetaUrlRaw)
 let imageMeta = imageMetaUrl ? await fetch(imageMetaUrl).then(res => res.json()) : null
-let imagePictureUrl = ref(prefixToGateway(imageMeta.image))
+let imagePictureUrl = ref(prefixToGateway(imageMeta?.image))
 async function _queryNameContract(contractAddress, query) {
     let encodedQuery = Buffer.from(JSON.stringify(query)).toString("base64")
     let response = await fetch(`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`).then(r => r.json())
@@ -160,6 +207,7 @@ async function _queryNameContract(contractAddress, query) {
 
 }
 function prefixToGateway(uri) {
+    if(!uri){return null}
     let protocol = (["ipfs://", "ar://"]).find(p => uri.startsWith(p))
     let gateway = ({
         'ipfs://': "https://ipfs.stargaze.zone/ipfs/",
