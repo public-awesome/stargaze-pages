@@ -1,4 +1,4 @@
-<template >
+<template>
     <div class="flex flex-col justify-between h-screen items-center bg-black">
         <div class="w-screen max-w-auto h-full  flex flex-col items-center justify-center p-2 ">
             <a v-if="imageNftLink" :href="imageNftLink" class="m-4"><img :src="imagePictureUrl"
@@ -132,19 +132,22 @@
 
 </template>
 <script setup>
+
 import SGNames from "sgnames.js";
 import { Buffer } from "buffer";
-let stargazeName = ref(window.location.hostname.split(".")[0])
+let host=useState("hostname",()=>(headers.host)||window.location.host)
+let stargazeName = ref(host.value.split(".")[0])
 let lcdEndpoint = 'https://rest.stargaze-apis.com';
 let ipfsGateway = 'https://ipfs.stargaze.zone/ipfs/'
 let nameInfo = ref(await SGNames.fetchNameInfo(stargazeName.value))
-nameInfo.value.name = nameInfo.value.name[0].toUpperCase() + nameInfo.value.name.slice(1)
+
+nameInfo.value.name = nameInfo.value?nameInfo.value.name[0].toUpperCase() + nameInfo.value.name.slice(1):""
 let imageNft = nameInfo.value.imageNFT
-let imageNftInfo = await _queryNameContract(nameInfo.value.imageNFT.collection, {
+let imageNftInfo = nameInfo.value?await _queryNameContract(nameInfo.value.imageNFT.collection, {
     "all_nft_info": {
         "token_id": imageNft.token_id
     }
-})
+}):null
 let imageMetaUrlRaw = imageNftInfo ? imageNftInfo.data.info.token_uri : null
 let imageNftLink = ref(imageNftInfo ? "https://stargaze.zone/media/" + imageNft.collection + "/" + imageNft.token_id : null)
 let imageMetaUrl = prefixToGateway(imageMetaUrlRaw)
