@@ -18,7 +18,7 @@
                         nameInfo.records.twitter
                 }}</p>
             </a>
-            <p v-if="nameInfo.records.discord"
+            <a v-if="nameInfo.records.discord" href="https://discord.com"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
 
                 <svg class="h-6 w-6" width="256px" height="256px" viewBox="0 -28.5 256 256" version="1.1"
@@ -33,7 +33,7 @@
             <p class="w-full "> {{
                     nameInfo.records.discord
             }}</p>
-            </p>
+            </a>
             <a v-if="nameInfo.records.telegram" :href="('https://t.me/' + nameInfo.records.telegram)"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
 
@@ -186,6 +186,7 @@ let stargazeName = ref(host.value.split(".")[0])
 let lcdEndpoint = 'https://rest.stargaze-apis.com';
 let ipfsGateway = 'https://ipfs.stargaze.zone/ipfs/'
 let nameInfo = ref(await SGNames.fetchNameInfo(stargazeName.value))
+console.log(nameInfo)
 if(nameInfo.value){
 nameInfo.value.name = nameInfo.value?nameInfo.value.name[0].toUpperCase() + nameInfo.value.name.slice(1):""
 }
