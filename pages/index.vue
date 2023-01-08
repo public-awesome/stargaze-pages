@@ -187,9 +187,6 @@ let lcdEndpoint = 'https://rest.stargaze-apis.com';
 let ipfsGateway = 'https://ipfs.stargaze.zone/ipfs/'
 let nameInfo = ref(await SGNames.fetchNameInfo(stargazeName.value))
 console.log(nameInfo)
-if(nameInfo.value){
-nameInfo.value.name = nameInfo.value?nameInfo.value.name[0].toUpperCase() + nameInfo.value.name.slice(1):""
-}
 let imageNft = nameInfo?.value?.imageNFT
 let imageNftInfo = nameInfo.value?await _queryNameContract(nameInfo.value.imageNFT.collection, {
     "all_nft_info": {
