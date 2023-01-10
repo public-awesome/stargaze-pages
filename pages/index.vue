@@ -62,7 +62,7 @@
             </a>
 
             <a v-if="nameInfo.addresses.stars"
-                :href="('https://www.mintscan.io/stargaze/account/' + nameInfo.addresses.stars)"
+                :href="('https://www.stargaze.zone/profile/stars1xm2pj03uglrzpcsypuzrl7hrlumzdy7g8zdhcy/' + nameInfo.addresses.stars+'/all')"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
 
                 <svg class="h-6 w-6" width="180" height="180" viewBox="0 0 180 180" fill="none"
@@ -186,7 +186,6 @@ let stargazeName = ref(host.value.split(".")[0])
 let lcdEndpoint = 'https://rest.stargaze-apis.com';
 let ipfsGateway = 'https://ipfs.stargaze.zone/ipfs/'
 let nameInfo = ref(await SGNames.fetchNameInfo(stargazeName.value))
-console.log(nameInfo)
 let imageNft = nameInfo?.value?.imageNFT
 let imageNftInfo = nameInfo.value?await _queryNameContract(nameInfo.value.imageNFT.collection, {
     "all_nft_info": {
