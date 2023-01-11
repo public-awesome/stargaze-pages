@@ -184,7 +184,7 @@ import { Buffer } from "buffer";
 let host=useState("hostname",()=>(headers.host)||window.location.host)
 let stargazeName = ref(host.value.split(".")[0])
 let lcdEndpoint = 'https://rest.stargaze-apis.com';
-let ipfsGateway = 'https://ipfs.stargaze.zone/ipfs/'
+let ipfsGateway = 'https://ipfs-gw.stargaze-apis.com/ipfs/'
 let nameInfo = ref(await SGNames.fetchNameInfo(stargazeName.value))
 let imageNft = nameInfo?.value?.imageNFT
 let imageNftInfo = nameInfo.value?await _queryNameContract(nameInfo.value.imageNFT.collection, {
