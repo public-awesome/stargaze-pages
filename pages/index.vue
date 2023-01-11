@@ -179,13 +179,13 @@
 </template>
 <script setup>
 
-import SGNames from "sgnames.js";
+import { toBech32, fromBech32 } from "@cosmjs/encoding"
 import { Buffer } from "buffer";
 let host=useState("hostname",()=>(headers.host)||window.location.host)
 let stargazeName = ref(host.value.split(".")[0])
 let lcdEndpoint = 'https://rest.stargaze-apis.com';
-let ipfsGateway = 'https://ipfs-gw.stargaze-apis.com/ipfs/'
-let nameInfo = ref(await SGNames.fetchNameInfo(stargazeName.value))
+
+let nameInfo = ref(await fetchNameInfo(stargazeName.value))
 let imageNft = nameInfo?.value?.imageNFT
 let imageNftInfo = nameInfo.value?await _queryNameContract(nameInfo.value.imageNFT.collection, {
     "all_nft_info": {
@@ -195,11 +195,16 @@ let imageNftInfo = nameInfo.value?await _queryNameContract(nameInfo.value.imageN
 let imageMetaUrlRaw = imageNftInfo ? imageNftInfo.data.info.token_uri : null
 let imageNftLink = ref(imageNftInfo ? "https://stargaze.zone/media/" + imageNft.collection + "/" + imageNft.token_id : null)
 let imageMetaUrl = prefixToGateway(imageMetaUrlRaw)
-let imageMeta = imageMetaUrl ? await fetch(imageMetaUrl).then(res => res.json()) : null
+let nuxtDataImageMeta=useNuxtData(imageMetaUrl).data.value
+let imageMeta = imageMetaUrl ? (nuxtDataImageMeta?nuxtDataImageMeta:await useFetch(imageMetaUrl,{key:imageMetaUrl}).then(fetchRes=>fetchRes.data.value)): null
 let imagePictureUrl = ref(prefixToGateway(imageMeta?.image))
 async function _queryNameContract(contractAddress, query) {
+
     let encodedQuery = Buffer.from(JSON.stringify(query)).toString("base64")
-    let response = await fetch(`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`).then(r => r.json())
+    let nuxtData=useNuxtData(`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`).data.value
+    let response = nuxtData?nuxtData:await useFetch(`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`,{key:`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`}).then(fetchRes=>fetchRes.data.value)
+  
+
     return response
 
 }
@@ -207,11 +212,34 @@ function prefixToGateway(uri) {
     if(!uri){return null}
     let protocol = (["ipfs://", "ar://"]).find(p => uri.startsWith(p))
     let gateway = ({
-        'ipfs://': "https://ipfs.stargaze.zone/ipfs/",
+        'ipfs://': 'https://ipfs-gw.stargaze-apis.com/ipfs/',
         "ar://": "https://arweave.net/"
     })[protocol]
 
     let contentIdentifier = uri.slice(protocol.length)
     return gateway + contentIdentifier
 }
+async function fetchNameInfo(name) {
+    let networks= ['stars', 'akash', 'osmo', 'cosmos', 'stride', 'juno', 'secret', 'cro', 'persistence', 'agoric', 'axelar', 'umee', 'gravity']
+        let queryResponse = await _queryNameContract("stars1fx74nkqkw2748av8j7ew7r3xt9cgjqduwn8m0ur5lhe49uhlsasszc5fhr", {
+            "all_nft_info": {
+                "token_id": name
+            }
+        })
+        // console.log(queryResponse)
+        if (!queryResponse.data) {
+            return null;
+        }
+        return {
+            name: name + ".stars",
+            owner: queryResponse.data.access.owner,
+            addresses: queryResponse?.data?.info?.token_uri ? Object.fromEntries(networks.map(network => [network, toBech32(network, fromBech32(queryResponse.data.info.token_uri).data)])) : [],
+            stargazeAddress: queryResponse.data.info.token_uri,
+            imageNFT: queryResponse.data.info.extension.image_nft,
+            records: queryResponse.data.info.extension.records.reduce((pv, cv) => {
+                return { ...pv, [cv.name]: cv.value }
+            }, {})
+        }
+
+    }
 </script>
