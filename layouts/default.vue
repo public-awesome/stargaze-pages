@@ -6,10 +6,10 @@
 
 </template>
 <script setup>
-let mainPage = ref(false)
+
 let headers=useRequestHeaders(["host"])
 let host=useState("hostname",()=>(headers.host)||window.location.host)
 
-mainPage.value = host.value.length < 3
+let mainPage = ref(host.value.split(".").length < 3) 
 
 </script>

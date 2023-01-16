@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@cosmjs/encoding": "^0.29.5",
+    "@nuxt/image-edge": "^1.0.0-27840416.dc1ed65",
     "buffer": "^6.0.3",
-    "postcss-custom-properties": "^12.1.11",
-    "sgnames.js": "^0.1.1"
+    "postcss-custom-properties": "^12.1.11"
   }
 }

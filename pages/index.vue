@@ -1,7 +1,7 @@
 <template>
     <div v-if="nameInfo" class="flex flex-col justify-between h-screen items-center bg-black">
         <div class="w-screen max-w-auto h-full  flex flex-col items-center justify-center p-2 ">
-            <a v-if="imageNftLink" :href="imageNftLink" class="m-4"><img :src="imagePictureUrl"
+            <a v-if="imageNftLink" :href="imageNftLink" class="m-4"><nuxt-img :src="imagePictureUrl" width="192" :alt="nameInfo.name+'\'s profile NFT'"
                     class="w-48 rounded-md " /></a>
             <div
                 class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
@@ -131,7 +131,7 @@
     </div>
 <div class="flex flex-col justify-between h-screen items-center bg-black" v-else>
     <div class="w-screen max-w-auto h-full  flex flex-col items-center justify-center p-2 ">
-           <img src="~/assets/sad-face.svg"
+           <nuxt-img src="sad-face.svg" provider="ipx"
                     class="w-48 rounded-md m-4" />
             <div
                 class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
@@ -192,20 +192,25 @@ let imageNftInfo = nameInfo.value?await _queryNameContract(nameInfo.value.imageN
         "token_id": imageNft.token_id
     }
 }):null
-let imageMetaUrlRaw = imageNftInfo ? imageNftInfo.data.info.token_uri : null
+let imageMetaUrlRaw = imageNftInfo ? imageNftInfo?.data.info.token_uri : null
 let imageNftLink = ref(imageNftInfo ? "https://stargaze.zone/media/" + imageNft.collection + "/" + imageNft.token_id : null)
 let imageMetaUrl = prefixToGateway(imageMetaUrlRaw)
-let nuxtDataImageMeta=useNuxtData(imageMetaUrl).data.value
-let imageMeta = imageMetaUrl ? (nuxtDataImageMeta?nuxtDataImageMeta:await useFetch(imageMetaUrl,{key:imageMetaUrl}).then(fetchRes=>fetchRes.data.value)): null
+let nuxtDataImageMeta=useNuxtData(imageMetaUrl)?.data.value
+let imageMeta = imageMetaUrl ? (nuxtDataImageMeta?nuxtDataImageMeta:await useFetch(imageMetaUrl,{key:imageMetaUrl}).then(fetchRes=>fetchRes?.data.value)): null
 let imagePictureUrl = ref(prefixToGateway(imageMeta?.image))
+// let createdNftsNuxtData=useNuxtData(`https://metabase.constellations.zone/api/public/card/a7be4444-f1f2-4da5-8bc7-edff96c736bd/query/json?parameters=%5B%7B%22type%22%3A%22category%22%2C%22value%22%3A%22${nameInfo.value.stargazeAddress}%22%2C%22target%22%3A%5B%22variable%22%2C%5B%22template-tag%22%2C%22address%22%5D%5D%2C%22id%22%3A%229fc00a15-029c-0c64-2f06-ec1a67595dff%22%7D%5D`)
+// console.log(createdNftsNuxtData.data.value)
+// let createdNfts=createdNftsNuxtData.data.value?createdNftsNuxtData.data:await useFetch(`https://metabase.constellations.zone/api/public/card/a7be4444-f1f2-4da5-8bc7-edff96c736bd/query/json?parameters=%5B%7B%22type%22%3A%22category%22%2C%22value%22%3A%22${nameInfo.value.stargazeAddress}%22%2C%22target%22%3A%5B%22variable%22%2C%5B%22template-tag%22%2C%22address%22%5D%5D%2C%22id%22%3A%229fc00a15-029c-0c64-2f06-ec1a67595dff%22%7D%5D`,
+// {key:`https://metabase.constellations.zone/api/public/card/a7be4444-f1f2-4da5-8bc7-edff96c736bd/query/json?parameters=%5B%7B%22type%22%3A%22category%22%2C%22value%22%3A%22${nameInfo.value.stargazeAddress}%22%2C%22target%22%3A%5B%22variable%22%2C%5B%22template-tag%22%2C%22address%22%5D%5D%2C%22id%22%3A%229fc00a15-029c-0c64-2f06-ec1a67595dff%22%7D%5D`}).then(fetchRes=>fetchRes.data)
+// console.log(createdNfts)
 async function _queryNameContract(contractAddress, query) {
 
     let encodedQuery = Buffer.from(JSON.stringify(query)).toString("base64")
-    let nuxtData=useNuxtData(`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`).data.value
-    let response = nuxtData?nuxtData:await useFetch(`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`,{key:`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`}).then(fetchRes=>fetchRes.data.value)
+    let nuxtData=useNuxtData(`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`)?.data.value
+    let response = nuxtData?nuxtData:await useFetch(`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`,{key:`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`}).then(fetchRes=>fetchRes?.data.value)
   
-
     return response
+    
 
 }
 function prefixToGateway(uri) {
@@ -226,8 +231,8 @@ async function fetchNameInfo(name) {
                 "token_id": name
             }
         })
-        // console.log(queryResponse)
-        if (!queryResponse.data) {
+   
+        if (!queryResponse?.data) {
             return null;
         }
         return {
@@ -242,4 +247,10 @@ async function fetchNameInfo(name) {
         }
 
     }
+    useHead({
+     title: nameInfo?.value?.name||"Stargaze Pages",
+
+  
+
+    })
 </script>

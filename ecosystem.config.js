@@ -6,7 +6,7 @@ module.exports = {
             instances: 'max',
             script: './.output/server/index.mjs',
             env: {
-                "PORT": 80,
+                "PORT": 8098,
                 "HOST": "0.0.0.0"
             }
         }
