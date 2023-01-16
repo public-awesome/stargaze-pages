@@ -213,8 +213,8 @@ let imageMeta = imageMetaUrl ? (nuxtDataImageMeta?nuxtDataImageMeta:await useFet
 let imagePictureUrl = ref(prefixToGateway(imageMeta?.image))
 let createdNftsNuxtData=useNuxtData(`collections-created-${nameInfo.value.stargazeAddress}`)
 
-let createdNfts=createdNftsNuxtData.data.value?createdNftsNuxtData.data:await useFetch(`https://metabase.constellations.zone/api/public/card/a7be4444-f1f2-4da5-8bc7-edff96c736bd/query/json?parameters=%5B%7B%22type%22%3A%22category%22%2C%22value%22%3A%22${nameInfo.value.stargazeAddress}%22%2C%22target%22%3A%5B%22variable%22%2C%5B%22template-tag%22%2C%22address%22%5D%5D%2C%22id%22%3A%229fc00a15-029c-0c64-2f06-ec1a67595dff%22%7D%5D`,
-{key:`collections-${nameInfo.value.stargazeAddress}`}).then(fetchRes=>fetchRes.data)
+let createdNfts=nameInfo.value?(createdNftsNuxtData.data.value?createdNftsNuxtData.data:await useFetch(`https://metabase.constellations.zone/api/public/card/a7be4444-f1f2-4da5-8bc7-edff96c736bd/query/json?parameters=%5B%7B%22type%22%3A%22category%22%2C%22value%22%3A%22${nameInfo.value.stargazeAddress}%22%2C%22target%22%3A%5B%22variable%22%2C%5B%22template-tag%22%2C%22address%22%5D%5D%2C%22id%22%3A%229fc00a15-029c-0c64-2f06-ec1a67595dff%22%7D%5D`,
+{key:`collections-${nameInfo.value.stargazeAddress}`}).then(fetchRes=>fetchRes.data)):ref([])
 
 async function _queryNameContract(contractAddress, query) {
 
