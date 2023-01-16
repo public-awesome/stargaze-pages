@@ -114,8 +114,8 @@
                 <div  v-if="createdNfts.length>0" class="flex flex-row p-1 justify-center w-[200px] md:w-1/2 lg:w-1/3  flex-wrap">
 
                     <a v-for="createdNft in createdNfts" :key="createdNft.sg721_addr" :href="'https://www.stargaze.zone/marketplace/' + createdNft.sg721_addr"
-                class=" m-1 flex flex-col py-4 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors min-w-[120px]">
-                <nuxt-img :src="prefixToGateway(createdNft.image)" width="120" class="w-[120px]"/>
+                class=" m-1 flex flex-col py-4 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors w-max">
+                <nuxt-img :src="prefixToGateway(createdNft.image)" height="120" fit="cover" :modifiers="{ animated: true }" />
                 <p class="w-full mt-4"> {{
                         createdNft.name
                 }}</p>
