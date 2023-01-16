@@ -1,7 +1,7 @@
 <template>
     <div v-if="nameInfo" class="flex flex-col justify-between h-screen items-center bg-black">
         <div class="w-screen max-w-auto h-full  flex flex-col items-center justify-center p-2 ">
-            <a v-if="imageNftLink" :href="imageNftLink" class="m-4"><nuxt-img :src="imagePictureUrl" width="192" :alt="nameInfo.name+'\'s profile NFT'"
+            <a v-if="imageNftLink" :href="imageNftLink" class="m-4"><nuxt-img v-if="imagePictureUrl" :src="imagePictureUrl" width="192" :alt="nameInfo.name+'\'s profile NFT'"
                     class="w-48 rounded-md " /></a>
             <div
                 class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
@@ -229,11 +229,11 @@ async function _queryNameContract(contractAddress, query) {
 function prefixToGateway(uri) {
     if(!uri){return null}
     let protocol = (["ipfs://", "ar://"]).find(p => uri.startsWith(p))
+    if(!protocol){return null}
     let gateway = ({
         'ipfs://': 'https://ipfs-gw.stargaze-apis.com/ipfs/',
         "ar://": "https://arweave.net/"
     })[protocol]
-
     let contentIdentifier = uri.slice(protocol.length)
     return gateway + contentIdentifier
 }
