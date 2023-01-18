@@ -1,7 +1,7 @@
 <template>
     <div v-if="nameInfo" class="flex flex-col justify-between min-h-screen items-center bg-black">
         <div class="w-screen max-w-auto h-full grow flex flex-col items-center justify-center p-2 ">
-            <a v-if="imageNftLink" :href="imageNftLink" class="m-4"><nuxt-img v-if="imagePictureUrl" target="_blank" :src="imagePictureUrl" width="192" height="192" :alt="nameInfo.name+'\'s profile NFT'"
+            <a v-if="imageNft"  class="m-4"><nuxt-img v-if="imageNft" target="_blank" :src="imageNft" width="192" height="192" :alt="nameInfo.name+'\'s profile NFT'"
                     class="w-48 rounded-md " /></a>
             <div
                 class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
@@ -14,9 +14,10 @@
                     <path fill="#1d9bf0"
                         d="M221.95 51.29c.15 2.17.15 4.34.15 6.53 0 66.73-50.8 143.69-143.69 143.69v-.04c-27.44.04-54.31-7.82-77.41-22.64 3.99.48 8 .72 12.02.73 22.74.02 44.83-7.61 62.72-21.66-21.61-.41-40.56-14.5-47.18-35.07 7.57 1.46 15.37 1.16 22.8-.87-23.56-4.76-40.51-25.46-40.51-49.5v-.64c7.02 3.91 14.88 6.08 22.92 6.32C11.58 63.31 4.74 33.79 18.14 10.71c25.64 31.55 63.47 50.73 104.08 52.76-4.07-17.54 1.49-35.92 14.61-48.25 20.34-19.12 52.33-18.14 71.45 2.19 11.31-2.23 22.15-6.38 32.07-12.26-3.77 11.69-11.66 21.62-22.2 27.93 10.01-1.18 19.79-3.86 29-7.95-6.78 10.16-15.32 19.01-25.2 26.16z" />
                 </svg>
-                <p class="w-full "> @{{
+                <p class="w-full flex flex-row justify-center items-center"> @{{
                         nameInfo.records.twitter
-                }}</p>
+                }}  <svg v-if="nameInfo.verifiedRecordKeys.includes('twitter')" viewBox="0 0 24 24" aria-label="Twitter Verified Account" role="img" class="fill-[#ec4899] w-6 h-6 ml-1"><g><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"></path></g></svg>
+                </p>
             </a>
             <a v-if="nameInfo.records.discord" href="https://discord.com" target="_blank"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
@@ -199,18 +200,8 @@ let stargazeName = ref(host.value.split(".")[0])
 let lcdEndpoint = 'https://rest.stargaze-apis.com';
 
 let nameInfo = ref(await fetchNameInfo(stargazeName.value))
-let imageNft = nameInfo?.value?.imageNFT
-let imageNftInfo = nameInfo.value?await _queryNameContract(nameInfo.value?.imageNFT?.collection, {
-    "all_nft_info": {
-        "token_id": imageNft?.token_id
-    }
-}):null
-let imageMetaUrlRaw = imageNftInfo ? imageNftInfo?.data.info.token_uri : null
-let imageNftLink = ref(imageNftInfo ? "https://stargaze.zone/media/" + imageNft.collection + "/" + imageNft.token_id : null)
-let imageMetaUrl = prefixToGateway(imageMetaUrlRaw)
-let nuxtDataImageMeta=useNuxtData(imageMetaUrl)?.data.value
-let imageMeta = imageMetaUrl ? (nuxtDataImageMeta?nuxtDataImageMeta:await useFetch(imageMetaUrl,{key:imageMetaUrl}).then(fetchRes=>fetchRes?.data.value)): null
-let imagePictureUrl = ref(prefixToGateway(imageMeta?.image))
+let imageNft = prefixToGateway( nameInfo?.value?.imageNFT)
+
 let createdNftsNuxtData=useNuxtData(`collections-created-${nameInfo.value?.stargazeAddress}`)
 
 let createdNfts=nameInfo.value?(createdNftsNuxtData.data.value?createdNftsNuxtData.data:await useFetch(`https://metabase.constellations.zone/api/public/card/a7be4444-f1f2-4da5-8bc7-edff96c736bd/query/json?parameters=%5B%7B%22type%22%3A%22category%22%2C%22value%22%3A%22${nameInfo.value.stargazeAddress}%22%2C%22target%22%3A%5B%22variable%22%2C%5B%22template-tag%22%2C%22address%22%5D%5D%2C%22id%22%3A%229fc00a15-029c-0c64-2f06-ec1a67595dff%22%7D%5D`,
@@ -239,24 +230,30 @@ function prefixToGateway(uri) {
 }
 async function fetchNameInfo(name) {
     let networks= ['stars', 'akash', 'osmo', 'cosmos', 'stride', 'juno', 'secret', 'cro', 'persistence', 'agoric', 'axelar', 'umee', 'gravity']
-        let queryResponse = await _queryNameContract("stars1fx74nkqkw2748av8j7ew7r3xt9cgjqduwn8m0ur5lhe49uhlsasszc5fhr", {
-            "all_nft_info": {
-                "token_id": name
-            }
-        })
+    let nameFromNuxtCache=useNuxtData(`name-${name}`)?.data?.value
+    let queryResponse
+    if(!nameFromNuxtCache){
+        queryResponse=await useFetch(`https://info.stargaze.zone/api/v1/name/${name}.json`,{key:`name-${name}`}).then(fetchRes=>fetchRes?.data?.value)
+    }else{
+        queryResponse=nameFromNuxtCache
+    }    
+    
+         
    
-        if (!queryResponse?.data) {
+        if (!queryResponse) {
             return null;
         }
+       
         return {
             name: name + ".stars",
-            owner: queryResponse.data.access.owner,
-            addresses: queryResponse?.data?.info?.token_uri ? Object.fromEntries(networks.map(network => [network, toBech32(network, fromBech32(queryResponse.data.info.token_uri).data)])) : [],
-            stargazeAddress: queryResponse.data.info.token_uri,
-            imageNFT: queryResponse.data.info.extension.image_nft,
-            records: queryResponse.data.info.extension.records.reduce((pv, cv) => {
-                return { ...pv, [cv.name]: cv.value }
-            }, {})
+            owner: queryResponse.name.owner_addr,
+            addresses: queryResponse.name.associated_addr ? Object.fromEntries(networks.map(network => [network, toBech32(network, fromBech32(queryResponse.name.associated_addr).data)])) : [],
+            stargazeAddress: queryResponse.name.associated_addr,
+            imageNFT: queryResponse.name.image_url,
+            records: queryResponse.records.reduce((pv, cv) => {
+                return { ...pv, [cv.record_name]: cv.record_value }
+            }, {}),
+            verifiedRecordKeys:queryResponse.records.filter(r=>r.verified).map(r=>r.record_name)
         }
 
     }
