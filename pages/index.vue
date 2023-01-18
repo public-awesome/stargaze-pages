@@ -1,5 +1,5 @@
 <template>
-    <div v-if="nameInfo" class="flex flex-col justify-between h-screen items-center bg-black">
+    <div v-if="nameInfo" class="flex flex-col justify-between min-h-screen items-center bg-black">
         <div class="w-screen max-w-auto h-full  flex flex-col items-center justify-center p-2 ">
             <a v-if="imageNftLink" :href="imageNftLink" class="m-4"><nuxt-img v-if="imagePictureUrl" :src="imagePictureUrl" width="192" height="192" :alt="nameInfo.name+'\'s profile NFT'"
                     class="w-48 rounded-md " /></a>
