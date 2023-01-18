@@ -5,8 +5,9 @@ export default defineNuxtConfig({
     css: ["@/assets/css/main.css"],
     app: {
         head: {
-            htmlAttrs: { "data-theme": "luxury", }
-        }
+            htmlAttrs: { "data-theme": "luxury", lang: "en" }
+        },
+
     },
     image: {
         domains: ['ipfs-gw.stargaze-apis.com']
