@@ -200,9 +200,9 @@ let lcdEndpoint = 'https://rest.stargaze-apis.com';
 
 let nameInfo = ref(await fetchNameInfo(stargazeName.value))
 let imageNft = nameInfo?.value?.imageNFT
-let imageNftInfo = nameInfo.value?await _queryNameContract(nameInfo.value.imageNFT.collection, {
+let imageNftInfo = nameInfo.value?await _queryNameContract(nameInfo.value?.imageNFT?.collection, {
     "all_nft_info": {
-        "token_id": imageNft.token_id
+        "token_id": imageNft?.token_id
     }
 }):null
 let imageMetaUrlRaw = imageNftInfo ? imageNftInfo?.data.info.token_uri : null
