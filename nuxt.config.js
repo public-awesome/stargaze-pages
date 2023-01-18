@@ -5,7 +5,11 @@ export default defineNuxtConfig({
     css: ["@/assets/css/main.css"],
     app: {
         head: {
-            htmlAttrs: { "data-theme": "luxury", lang: "en" }
+            htmlAttrs: { "data-theme": "luxury", lang: "en" },
+            link: [
+                { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+                { rel: 'preconnect', href: 'https://fonts.gstatic.com' }
+            ]
         },
 
     },
