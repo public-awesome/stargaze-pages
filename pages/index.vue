@@ -1,12 +1,12 @@
 <template>
     <div v-if="nameInfo" class="flex flex-col justify-between min-h-screen items-center bg-black">
         <div class="w-screen max-w-auto h-full grow flex flex-col items-center justify-center p-2 ">
-            <a v-if="imageNft"  class="m-4"><img v-if="imageNft" target="_blank" :src="imageNft" width="192" height="192" :alt="nameInfo.name+'\'s profile NFT'"
-                    class="w-48 rounded-md " /></a>
+            <a v-if="imageNft" class="m-4"><img v-if="imageNft" target="_blank" :src="imageNft" width="192" height="192"
+                    :alt="nameInfo.name + '\'s profile NFT'" class="w-48 rounded-md " /></a>
             <div
                 class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
                 {{
-                        nameInfo.name
+                    nameInfo.name
                 }}</div>
             <a v-if="nameInfo.records.twitter" :href="'https://twitter.com/' + nameInfo.records.twitter" target="_blank"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
@@ -15,8 +15,15 @@
                         d="M221.95 51.29c.15 2.17.15 4.34.15 6.53 0 66.73-50.8 143.69-143.69 143.69v-.04c-27.44.04-54.31-7.82-77.41-22.64 3.99.48 8 .72 12.02.73 22.74.02 44.83-7.61 62.72-21.66-21.61-.41-40.56-14.5-47.18-35.07 7.57 1.46 15.37 1.16 22.8-.87-23.56-4.76-40.51-25.46-40.51-49.5v-.64c7.02 3.91 14.88 6.08 22.92 6.32C11.58 63.31 4.74 33.79 18.14 10.71c25.64 31.55 63.47 50.73 104.08 52.76-4.07-17.54 1.49-35.92 14.61-48.25 20.34-19.12 52.33-18.14 71.45 2.19 11.31-2.23 22.15-6.38 32.07-12.26-3.77 11.69-11.66 21.62-22.2 27.93 10.01-1.18 19.79-3.86 29-7.95-6.78 10.16-15.32 19.01-25.2 26.16z" />
                 </svg>
                 <p class="w-full flex flex-row justify-center items-center"> @{{
-                        nameInfo.records.twitter
-                }}  <svg v-if="nameInfo.verifiedRecordKeys.includes('twitter')" viewBox="0 0 24 24" aria-label="Twitter Verified Account" role="img" class="fill-[#ec4899] w-6 h-6 ml-1"><g><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"></path></g></svg>
+                    nameInfo.records.twitter
+                }} <svg v-if="nameInfo.verifiedRecordKeys.includes('twitter')" viewBox="0 0 24 24"
+                        aria-label="Twitter Verified Account" role="img" class="fill-[#ec4899] w-6 h-6 ml-1">
+                        <g>
+                            <path
+                                d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z">
+                            </path>
+                        </g>
+                    </svg>
                 </p>
             </a>
             <a v-if="nameInfo.records.discord" href="https://discord.com" target="_blank"
@@ -31,9 +38,9 @@
                             fill="#5865F2" fill-rule="nonzero"></path>
                     </g>
                 </svg>
-            <p class="w-full "> {{
+                <p class="w-full "> {{
                     nameInfo.records.discord
-            }}</p>
+                }}</p>
             </a>
             <a v-if="nameInfo.records.telegram" :href="('https://t.me/' + nameInfo.records.telegram)" target="_blank"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
@@ -58,12 +65,12 @@
                         fill="#fff" />
                 </svg>
                 <p class="w-full "> @{{
-                        nameInfo.records.telegram
+                    nameInfo.records.telegram
                 }}</p>
             </a>
 
             <a v-if="nameInfo.addresses.stars" target="_blank"
-                :href="('https://www.stargaze.zone/profile/' + nameInfo.addresses.stars+'/all')"
+                :href="('https://www.stargaze.zone/profile/' + nameInfo.addresses.stars + '/all')"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
 
                 <svg class="h-6 w-6" width="180" height="180" viewBox="0 0 180 180" fill="none"
@@ -77,7 +84,7 @@
                 </svg>
 
                 <p class="w-full"> {{
-                        nameInfo.addresses.stars.slice(0, 8) + "..." + nameInfo.addresses.stars.slice(-8)
+                    nameInfo.addresses.stars.slice(0, 8) + "..." + nameInfo.addresses.stars.slice(-8)
                 }}</p>
             </a>
             <a v-if="nameInfo.addresses.cosmos" target="_blank"
@@ -105,29 +112,32 @@
                 </svg>
 
                 <p class="w-full"> {{
-                        nameInfo.addresses.cosmos.slice(0, 8) + "..." + nameInfo.addresses.cosmos.slice(-8)
+                    nameInfo.addresses.cosmos.slice(0, 8) + "..." + nameInfo.addresses.cosmos.slice(-8)
                 }}</p>
             </a>
 
-            <div
-                class="m-2 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white my-4 text-lg font-sans text-center" v-if="createdNfts.length>0">
+            <div class="m-2 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white my-4 text-lg font-sans text-center"
+                v-if="createdNfts.length > 0">
                 Created collections:</div>
-                <div  v-if="createdNfts.length>0" class="flex flex-row p-1 justify-center w-[200px] md:w-1/2 lg:w-1/3  flex-wrap">
+            <div v-if="createdNfts.length > 0"
+                class="flex flex-row p-1 justify-center w-[200px] md:w-1/2 lg:w-1/3  flex-wrap">
 
-                    <a v-for="createdNft in createdNfts" :key="createdNft.sg721_addr" :href="'https://www.stargaze.zone/marketplace/' + createdNft.sg721_addr"
-                class=" m-1 flex flex-col py-4 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors w-max">
-                <img :src="prefixToGateway(createdNft.image)" :alt="createdNft.name+'collection preview'" height="120" fit="cover" :modifiers="{ animated: true }" />
-                <p class="w-full mt-4"> {{
+                <a v-for="createdNft in createdNfts" :key="createdNft.sg721_addr"
+                    :href="'https://www.stargaze.zone/marketplace/' + createdNft.sg721_addr"
+                    class=" m-1 flex flex-col py-4 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors w-max">
+                    <img :src="prefixToGateway(createdNft.image)" :alt="createdNft.name + 'collection preview'"
+                        height="120" fit="cover" :modifiers="{ animated: true }" />
+                    <p class="w-full mt-4"> {{
                         createdNft.name
-                }}</p>
-            </a>
-                </div>
-                 
+                    }}</p>
+                </a>
+            </div>
+
         </div>
         <div class="m-4 text-center">
             <p class="text-zinc-400 my-1 text-center">Made with 💜 by </p>
-            <a href="https://stargaze.zone" target="_blank"><svg width="124" height="30" viewBox="0 0 124 30" fill="none"
-                    xmlns="http://www.w3.org/2000/svg" class="justify-self-end">
+            <a href="https://stargaze.zone" target="_blank"><svg width="124" height="30" viewBox="0 0 124 30"
+                    fill="none" xmlns="http://www.w3.org/2000/svg" class="justify-self-end">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M8.51686 8.22623H13.9122V3.0142H8.61996C3.36208 2.87042 2.50295 3.7331 2.36058 9.5562V11.0299C2.29676 16.242 3.36208 17.7157 7.24535 17.6079H8.20757V21.7775H2.46858V26.9895H8.17321C12.297 26.9895 12.572 26.9177 13.6029 25.6596C14.2902 24.5093 14.4277 23.7545 14.5308 20.2319V18.7581C14.5308 13.6899 13.4998 12.324 9.61655 12.3959H8.51686V8.22623ZM24.1531 8.22615H26.9367V3.01412H15.2182V8.22615H18.0018V26.9895H24.1531V8.22615ZM34.4232 26.9895H28.2718V7.90264C28.3405 3.66113 29.1309 3.01412 34.4624 3.01412H36.9711C42.2977 3.01412 43.0881 3.62518 43.1568 7.90264V26.9895H37.0055V21.9212H34.4281V26.9895H34.4232ZM37.0006 16.6013V10.275C37.0006 8.72938 36.5882 8.04642 35.6947 8.04642C34.8012 8.04642 34.4232 8.76532 34.4232 10.275V16.6013H37.0006ZM60.2658 7.65099C60.094 3.51731 59.338 2.90625 54.7674 3.01408H45.3857V26.9894H51.5371V17.6078H52.3275C53.6333 17.6437 54.1488 18.2548 54.1145 19.7645V22.9636C54.1145 24.653 54.2519 25.947 54.5956 26.9894H60.7469C60.472 25.983 60.2658 24.5452 60.2658 22.9636V19.2612C60.3346 16.5654 59.4754 15.4151 56.898 14.6962C59.4754 14.4805 60.3689 12.9709 60.2658 9.19663V7.65099ZM54.1488 10.3469C54.1488 12.0363 53.8395 12.3957 52.3962 12.3957H51.5371V8.22611H52.3962C53.7021 8.22611 54.1488 8.76529 54.1488 10.3469ZM77.1443 21.6697C77.213 26.4503 76.4914 27.0974 71.0617 26.9895H68.5186C62.6765 27.0614 62.2642 26.6301 62.3329 20.5194L62.2985 18.6503V11.4613C62.3623 3.66119 62.8778 2.97823 68.5137 3.01418H77.1394V8.90916C76.4177 8.54971 74.6995 8.2981 72.6719 8.22621H70.5069C68.6168 8.22621 68.445 8.40593 68.445 10.4189V18.9378C68.4106 21.454 68.5824 21.7415 69.9914 21.7775H70.988V15.9903C70.988 15.0198 70.8162 14.1931 70.5069 13.2945H77.1394V21.6697H77.1443ZM79.2356 26.9895H85.3869V21.9212H87.9643V26.9895H94.1157V7.90264C94.047 3.62518 93.2566 3.01412 87.93 3.01412H85.4213C80.0947 3.01412 79.3043 3.66113 79.2356 7.90264V26.9895ZM87.9643 10.275V16.6013H85.3869V10.275C85.3869 8.76532 85.765 8.04642 86.6585 8.04642C87.552 8.04642 87.9643 8.72938 87.9643 10.275ZM108.137 3.01412L103.016 21.7774H108.515L107.827 26.9895H95.5246L100.714 8.22615H95.5934L96.315 3.01412H108.137ZM115.972 8.2261H121.642V3.01406H115.903C110.542 2.94217 109.958 3.66108 109.821 10.7063V18.3626C109.786 21.8852 110.061 24.4733 110.542 25.3C111.47 26.8456 111.814 26.9535 115.903 26.9894H121.642V21.7774H115.972V17.6077H121.642V12.3957H115.972V8.2261Z"
                         fill="url(#paint0_linear_88_123)" />
@@ -143,17 +153,15 @@
             </a>
         </div>
     </div>
-<div class="flex flex-col justify-between h-screen items-center bg-black" v-else>
-    <div class="w-screen max-w-auto h-full  flex flex-col items-center justify-center p-2 ">
-           <img src="sad-face.svg" provider="ipx"
-                    class="w-48 rounded-md m-4" />
+    <div class="flex flex-col justify-between h-screen items-center bg-black" v-else>
+        <div class="w-screen max-w-auto h-full  flex flex-col items-center justify-center p-2 ">
+            <img src="~/assets/sad-face.svg" provider="ipx" class="w-48 rounded-md m-4" />
             <div
                 class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
                 No name found</div>
-         
 
-            <a 
-                href="https://stargaze.zone/names"
+
+            <a href="https://stargaze.zone/names"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
 
                 <svg class="h-6 w-6" width="180" height="180" viewBox="0 0 180 180" fill="none"
@@ -166,15 +174,15 @@
                         fill="white" />
                 </svg>
 
-                <p class="w-full"> Register "{{stargazeName}}" on Stargaze</p>
+                <p class="w-full"> Register "{{ stargazeName }}" on Stargaze</p>
             </a>
 
 
         </div>
         <div class="m-4 text-center">
             <p class="text-zinc-400 my-1 text-center">Made with 💜 by </p>
-            <a href="https://stargaze.zone" aria-label="Stargaze"><svg width="124" height="30" viewBox="0 0 124 30" fill="none"
-                    xmlns="http://www.w3.org/2000/svg" class="justify-self-end">
+            <a href="https://stargaze.zone" aria-label="Stargaze"><svg width="124" height="30" viewBox="0 0 124 30"
+                    fill="none" xmlns="http://www.w3.org/2000/svg" class="justify-self-end">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M8.51686 8.22623H13.9122V3.0142H8.61996C3.36208 2.87042 2.50295 3.7331 2.36058 9.5562V11.0299C2.29676 16.242 3.36208 17.7157 7.24535 17.6079H8.20757V21.7775H2.46858V26.9895H8.17321C12.297 26.9895 12.572 26.9177 13.6029 25.6596C14.2902 24.5093 14.4277 23.7545 14.5308 20.2319V18.7581C14.5308 13.6899 13.4998 12.324 9.61655 12.3959H8.51686V8.22623ZM24.1531 8.22615H26.9367V3.01412H15.2182V8.22615H18.0018V26.9895H24.1531V8.22615ZM34.4232 26.9895H28.2718V7.90264C28.3405 3.66113 29.1309 3.01412 34.4624 3.01412H36.9711C42.2977 3.01412 43.0881 3.62518 43.1568 7.90264V26.9895H37.0055V21.9212H34.4281V26.9895H34.4232ZM37.0006 16.6013V10.275C37.0006 8.72938 36.5882 8.04642 35.6947 8.04642C34.8012 8.04642 34.4232 8.76532 34.4232 10.275V16.6013H37.0006ZM60.2658 7.65099C60.094 3.51731 59.338 2.90625 54.7674 3.01408H45.3857V26.9894H51.5371V17.6078H52.3275C53.6333 17.6437 54.1488 18.2548 54.1145 19.7645V22.9636C54.1145 24.653 54.2519 25.947 54.5956 26.9894H60.7469C60.472 25.983 60.2658 24.5452 60.2658 22.9636V19.2612C60.3346 16.5654 59.4754 15.4151 56.898 14.6962C59.4754 14.4805 60.3689 12.9709 60.2658 9.19663V7.65099ZM54.1488 10.3469C54.1488 12.0363 53.8395 12.3957 52.3962 12.3957H51.5371V8.22611H52.3962C53.7021 8.22611 54.1488 8.76529 54.1488 10.3469ZM77.1443 21.6697C77.213 26.4503 76.4914 27.0974 71.0617 26.9895H68.5186C62.6765 27.0614 62.2642 26.6301 62.3329 20.5194L62.2985 18.6503V11.4613C62.3623 3.66119 62.8778 2.97823 68.5137 3.01418H77.1394V8.90916C76.4177 8.54971 74.6995 8.2981 72.6719 8.22621H70.5069C68.6168 8.22621 68.445 8.40593 68.445 10.4189V18.9378C68.4106 21.454 68.5824 21.7415 69.9914 21.7775H70.988V15.9903C70.988 15.0198 70.8162 14.1931 70.5069 13.2945H77.1394V21.6697H77.1443ZM79.2356 26.9895H85.3869V21.9212H87.9643V26.9895H94.1157V7.90264C94.047 3.62518 93.2566 3.01412 87.93 3.01412H85.4213C80.0947 3.01412 79.3043 3.66113 79.2356 7.90264V26.9895ZM87.9643 10.275V16.6013H85.3869V10.275C85.3869 8.76532 85.765 8.04642 86.6585 8.04642C87.552 8.04642 87.9643 8.72938 87.9643 10.275ZM108.137 3.01412L103.016 21.7774H108.515L107.827 26.9895H95.5246L100.714 8.22615H95.5934L96.315 3.01412H108.137ZM115.972 8.2261H121.642V3.01406H115.903C110.542 2.94217 109.958 3.66108 109.821 10.7063V18.3626C109.786 21.8852 110.061 24.4733 110.542 25.3C111.47 26.8456 111.814 26.9535 115.903 26.9894H121.642V21.7774H115.972V17.6077H121.642V12.3957H115.972V8.2261Z"
                         fill="url(#paint0_linear_88_123)" />
@@ -189,36 +197,36 @@
                 </svg>
             </a>
         </div>
-</div>
+    </div>
 </template>
 <script setup>
 
 import { toBech32, fromBech32 } from "@cosmjs/encoding"
 import { Buffer } from "buffer";
-let host=useState("hostname",()=>(headers.host)||window.location.host)
+let host = useState("hostname", () => (headers.host) || window.location.host)
 let stargazeName = ref(host.value.split(".")[0])
 let lcdEndpoint = 'https://rest.stargaze-apis.com';
 
 let nameInfo = ref(await fetchNameInfo(stargazeName.value))
-let imageNft = prefixToGateway( nameInfo?.value?.imageNFT)
+let imageNft = prefixToGateway(nameInfo?.value?.imageNFT)
 
 
-let createdNfts=await useFetch(`https://metabase.constellations.zone/api/public/card/a7be4444-f1f2-4da5-8bc7-edff96c736bd/query/json?parameters=%5B%7B%22type%22%3A%22category%22%2C%22value%22%3A%22${nameInfo.value.stargazeAddress}%22%2C%22target%22%3A%5B%22variable%22%2C%5B%22template-tag%22%2C%22address%22%5D%5D%2C%22id%22%3A%229fc00a15-029c-0c64-2f06-ec1a67595dff%22%7D%5D`).then(fetchRes=>fetchRes.data)
+let createdNfts = await useFetch(`https://metabase.constellations.zone/api/public/card/a7be4444-f1f2-4da5-8bc7-edff96c736bd/query/json?parameters=%5B%7B%22type%22%3A%22category%22%2C%22value%22%3A%22${nameInfo.value.stargazeAddress}%22%2C%22target%22%3A%5B%22variable%22%2C%5B%22template-tag%22%2C%22address%22%5D%5D%2C%22id%22%3A%229fc00a15-029c-0c64-2f06-ec1a67595dff%22%7D%5D`).then(fetchRes => fetchRes.data)
 
 async function _queryNameContract(contractAddress, query) {
 
     let encodedQuery = Buffer.from(JSON.stringify(query)).toString("base64")
 
-    let response = await useFetch(`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`).then(fetchRes=>fetchRes?.data.value)
-  
+    let response = await useFetch(`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`).then(fetchRes => fetchRes?.data.value)
+
     return response
-    
+
 
 }
 function prefixToGateway(uri) {
-    if(!uri){return null}
+    if (!uri) { return null }
     let protocol = (["ipfs://", "ar://"]).find(p => uri.startsWith(p))
-    if(!protocol){return null}
+    if (!protocol) { return null }
     let gateway = ({
         'ipfs://': 'https://ipfs-gw.stargaze-apis.com/ipfs/',
         "ar://": "https://arweave.net/"
@@ -227,34 +235,34 @@ function prefixToGateway(uri) {
     return gateway + contentIdentifier
 }
 async function fetchNameInfo(name) {
-    let networks= ['stars', 'akash', 'osmo', 'cosmos', 'stride', 'juno', 'secret', 'cro', 'persistence', 'agoric', 'axelar', 'umee', 'gravity']
+    let networks = ['stars', 'akash', 'osmo', 'cosmos', 'stride', 'juno', 'secret', 'cro', 'persistence', 'agoric', 'axelar', 'umee', 'gravity']
 
-    let queryResponse=await useFetch(`https://info.stargaze.zone/api/v1/name/${name}.json`,{key:`name-${name}`}).then(fetchRes=>fetchRes?.data?.value)
-  
-    
-         
-   
-        if (!queryResponse) {
-            return null;
-        }
-       
-        return {
-            name: name + ".stars",
-            owner: queryResponse.name.owner_addr,
-            addresses: queryResponse.name.associated_addr ? Object.fromEntries(networks.map(network => [network, toBech32(network, fromBech32(queryResponse.name.associated_addr).data)])) : [],
-            stargazeAddress: queryResponse.name.associated_addr,
-            imageNFT: queryResponse.name.image_url,
-            records: queryResponse.records.reduce((pv, cv) => {
-                return { ...pv, [cv.record_name]: cv.record_value }
-            }, {}),
-            verifiedRecordKeys:queryResponse.records.filter(r=>r.verified).map(r=>r.record_name)
-        }
+    let queryResponse = await useFetch(`https://info.stargaze.zone/api/v1/name/${name}.json`, { key: `name-${name}` }).then(fetchRes => fetchRes?.data?.value)
 
+
+
+
+    if (!queryResponse) {
+        return null;
     }
-    useHead({
-     title: nameInfo?.value?.name||"Stargaze Pages",
 
-  
+    return {
+        name: name + ".stars",
+        owner: queryResponse.name.owner_addr,
+        addresses: queryResponse.name.associated_addr ? Object.fromEntries(networks.map(network => [network, toBech32(network, fromBech32(queryResponse.name.associated_addr).data)])) : [],
+        stargazeAddress: queryResponse.name.associated_addr,
+        imageNFT: queryResponse.name.image_url,
+        records: queryResponse.records.reduce((pv, cv) => {
+            return { ...pv, [cv.record_name]: cv.record_value }
+        }, {}),
+        verifiedRecordKeys: queryResponse.records.filter(r => r.verified).map(r => r.record_name)
+    }
 
-    })
+}
+useHead({
+    title: nameInfo?.value?.name || "Stargaze Pages",
+
+
+
+})
 </script>
