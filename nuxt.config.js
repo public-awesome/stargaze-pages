@@ -1,7 +1,5 @@
 export default defineNuxtConfig({
-    modules: ['@nuxtjs/tailwindcss', '@nuxt/image-edge'],
-    mode: "universal",
-
+    modules: ['@nuxtjs/tailwindcss'],
     css: ["@/assets/css/main.css"],
     app: {
         head: {

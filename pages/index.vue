@@ -1,7 +1,7 @@
 <template>
     <div v-if="nameInfo" class="flex flex-col justify-between min-h-screen items-center bg-black">
         <div class="w-screen max-w-auto h-full grow flex flex-col items-center justify-center p-2 ">
-            <a v-if="imageNft"  class="m-4"><nuxt-img v-if="imageNft" target="_blank" :src="imageNft" width="192" height="192" :alt="nameInfo.name+'\'s profile NFT'"
+            <a v-if="imageNft"  class="m-4"><img v-if="imageNft" target="_blank" :src="imageNft" width="192" height="192" :alt="nameInfo.name+'\'s profile NFT'"
                     class="w-48 rounded-md " /></a>
             <div
                 class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
@@ -116,7 +116,7 @@
 
                     <a v-for="createdNft in createdNfts" :key="createdNft.sg721_addr" :href="'https://www.stargaze.zone/marketplace/' + createdNft.sg721_addr"
                 class=" m-1 flex flex-col py-4 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors w-max">
-                <nuxt-img :src="prefixToGateway(createdNft.image)" :alt="createdNft.name+'collection preview'" height="120" fit="cover" :modifiers="{ animated: true }" />
+                <img :src="prefixToGateway(createdNft.image)" :alt="createdNft.name+'collection preview'" height="120" fit="cover" :modifiers="{ animated: true }" />
                 <p class="w-full mt-4"> {{
                         createdNft.name
                 }}</p>
@@ -145,7 +145,7 @@
     </div>
 <div class="flex flex-col justify-between h-screen items-center bg-black" v-else>
     <div class="w-screen max-w-auto h-full  flex flex-col items-center justify-center p-2 ">
-           <nuxt-img src="sad-face.svg" provider="ipx"
+           <img src="sad-face.svg" provider="ipx"
                     class="w-48 rounded-md m-4" />
             <div
                 class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
@@ -202,16 +202,14 @@ let lcdEndpoint = 'https://rest.stargaze-apis.com';
 let nameInfo = ref(await fetchNameInfo(stargazeName.value))
 let imageNft = prefixToGateway( nameInfo?.value?.imageNFT)
 
-let createdNftsNuxtData=useNuxtData(`collections-created-${nameInfo.value?.stargazeAddress}`)
 
-let createdNfts=nameInfo.value?(createdNftsNuxtData.data.value?createdNftsNuxtData.data:await useFetch(`https://metabase.constellations.zone/api/public/card/a7be4444-f1f2-4da5-8bc7-edff96c736bd/query/json?parameters=%5B%7B%22type%22%3A%22category%22%2C%22value%22%3A%22${nameInfo.value.stargazeAddress}%22%2C%22target%22%3A%5B%22variable%22%2C%5B%22template-tag%22%2C%22address%22%5D%5D%2C%22id%22%3A%229fc00a15-029c-0c64-2f06-ec1a67595dff%22%7D%5D`,
-{key:`collections-${nameInfo.value.stargazeAddress}`}).then(fetchRes=>fetchRes.data)):ref([])
+let createdNfts=await useFetch(`https://metabase.constellations.zone/api/public/card/a7be4444-f1f2-4da5-8bc7-edff96c736bd/query/json?parameters=%5B%7B%22type%22%3A%22category%22%2C%22value%22%3A%22${nameInfo.value.stargazeAddress}%22%2C%22target%22%3A%5B%22variable%22%2C%5B%22template-tag%22%2C%22address%22%5D%5D%2C%22id%22%3A%229fc00a15-029c-0c64-2f06-ec1a67595dff%22%7D%5D`).then(fetchRes=>fetchRes.data)
 
 async function _queryNameContract(contractAddress, query) {
 
     let encodedQuery = Buffer.from(JSON.stringify(query)).toString("base64")
-    let nuxtData=useNuxtData(`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`)?.data.value
-    let response = nuxtData?nuxtData:await useFetch(`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`,{key:`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`}).then(fetchRes=>fetchRes?.data.value)
+
+    let response = await useFetch(`${lcdEndpoint}/cosmwasm/wasm/v1/contract/${contractAddress}/smart/${encodedQuery}`).then(fetchRes=>fetchRes?.data.value)
   
     return response
     
@@ -230,13 +228,9 @@ function prefixToGateway(uri) {
 }
 async function fetchNameInfo(name) {
     let networks= ['stars', 'akash', 'osmo', 'cosmos', 'stride', 'juno', 'secret', 'cro', 'persistence', 'agoric', 'axelar', 'umee', 'gravity']
-    let nameFromNuxtCache=useNuxtData(`name-${name}`)?.data?.value
-    let queryResponse
-    if(!nameFromNuxtCache){
-        queryResponse=await useFetch(`https://info.stargaze.zone/api/v1/name/${name}.json`,{key:`name-${name}`}).then(fetchRes=>fetchRes?.data?.value)
-    }else{
-        queryResponse=nameFromNuxtCache
-    }    
+
+    let queryResponse=await useFetch(`https://info.stargaze.zone/api/v1/name/${name}.json`,{key:`name-${name}`}).then(fetchRes=>fetchRes?.data?.value)
+  
     
          
    
