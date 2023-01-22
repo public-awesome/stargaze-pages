@@ -10,7 +10,7 @@
                 }}</div>
             <a v-if="nameInfo.records.twitter" :href="'https://twitter.com/' + nameInfo.records.twitter" target="_blank"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
-                 <img src="~/assets/twitter.svg"  class="h-6 w-6" width="180" height="180"/>
+                <img src="~/assets/twitter.svg" class="h-6 w-6" width="180" height="180" />
                 <p class="w-full flex flex-row justify-center items-center"> @{{
                     nameInfo.records.twitter
                 }} <svg v-if="nameInfo.verifiedRecordKeys.includes('twitter')" viewBox="0 0 24 24"
@@ -26,7 +26,7 @@
             <a v-if="nameInfo.records.discord" href="https://discord.com" target="_blank"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
 
-                 <img src="~/assets/discord.svg"  class="h-6 w-6" width="180" height="180"/>
+                <img src="~/assets/discord.svg" class="h-6 w-6" width="180" height="180" />
                 <p class="w-full "> {{
                     nameInfo.records.discord
                 }}</p>
@@ -34,7 +34,7 @@
             <a v-if="nameInfo.records.telegram" :href="('https://t.me/' + nameInfo.records.telegram)" target="_blank"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
 
-                 <img src="~/assets/telegram.svg"  class="h-6 w-6" width="180" height="180"/>
+                <img src="~/assets/telegram.svg" class="h-6 w-6" width="180" height="180" />
                 <p class="w-full "> @{{
                     nameInfo.records.telegram
                 }}</p>
@@ -44,7 +44,7 @@
                 :href="('https://www.stargaze.zone/profile/' + nameInfo.addresses.stars + '/all')"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
 
-                 <img src="~/assets/stargaze-mini.svg"  class="h-6 w-6" width="180" height="180"/>
+                <img src="~/assets/stargaze-mini.svg" class="h-6 w-6" width="180" height="180" />
 
                 <p class="w-full"> {{
                     nameInfo.addresses.stars.slice(0, 8) + "..." + nameInfo.addresses.stars.slice(-8)
@@ -54,7 +54,7 @@
                 :href="('https://www.mintscan.io/cosmos/account/' + nameInfo.addresses.cosmos)"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
 
-               <img class="w-6 h-6" src="~/assets/cosmos.svg"/>
+                <img class="w-6 h-6" src="~/assets/cosmos.svg" />
 
                 <p class="w-full"> {{
                     nameInfo.addresses.cosmos.slice(0, 8) + "..." + nameInfo.addresses.cosmos.slice(-8)
@@ -81,7 +81,7 @@
         </div>
         <div class="m-4 text-center">
             <p class="text-zinc-400 my-1 text-center">Made with 💜 by </p>
-            <a href="https://stargaze.zone" target="_blank"><img src="~/assets/stargaze.svg" width="124" height="30"/>
+            <a href="https://stargaze.zone" target="_blank"><img src="~/assets/stargaze.svg" width="124" height="30" />
             </a>
         </div>
     </div>
@@ -95,8 +95,8 @@
 
             <a href="https://stargaze.zone/names"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
-                <img src="~/assets/stargaze-mini.svg"  class="h-6 w-6" width="180" height="180"/>
-        
+                <img src="~/assets/stargaze-mini.svg" class="h-6 w-6" width="180" height="180" />
+
 
                 <p class="w-full"> Register "{{ stargazeName }}" on Stargaze</p>
             </a>
@@ -105,7 +105,8 @@
         </div>
         <div class="m-4 text-center">
             <p class="text-zinc-400 my-1 text-center">Made with 💜 by </p>
-            <a href="https://stargaze.zone" aria-label="Stargaze"><img src="~/assets/stargaze.svg" width="124" height="30"/>
+            <a href="https://stargaze.zone" aria-label="Stargaze"><img src="~/assets/stargaze.svg" width="124"
+                    height="30" />
             </a>
         </div>
     </div>
@@ -163,7 +164,13 @@ async function fetchNameInfo(name) {
 useHead({
     title: nameInfo?.value?.name || "Stargaze Pages",
 
-
+    meta: [
+        { hid: 'og:title', name: 'og:title', content: nameInfo?.value?.name || "Stargaze Pages" },
+        { hid: 'og:image', name: 'og:image', content: imageNFT },
+        { hid: 'og:description', name: 'og:description', content: nameInfo?.value?.name + "'s personal site on Stargaze Pages.' " },
+        { hid: 'og:type', name: 'og:type', content: "website" },
+        { hid: 'og:url', name: 'og:url', content: 'https://' + stargazeName.value + ".stars.page" },
+    ]
 
 })
 </script>
