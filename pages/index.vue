@@ -166,10 +166,11 @@ useHead({
 
     meta: [
         { hid: 'og:title', name: 'og:title', content: nameInfo?.value?.name || "Stargaze Pages" },
-        { hid: 'og:image', name: 'og:image', content: imageNFT },
-        { hid: 'og:description', name: 'og:description', content: nameInfo?.value?.name + "'s personal site on Stargaze Pages.' " },
+        { hid: 'og:image', name: 'og:image', content: nameInfo?.value?.imageNFT },
+        { hid: 'og:description', name: 'og:description', content: nameInfo?.value?.name + "'s personal site on Stargaze Pages." },
         { hid: 'og:type', name: 'og:type', content: "website" },
         { hid: 'og:url', name: 'og:url', content: 'https://' + stargazeName.value + ".stars.page" },
+        { hid: 'theme-color', name: 'theme-color', content: "#ec4899" },
     ]
 
 })
