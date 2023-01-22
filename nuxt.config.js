@@ -6,7 +6,9 @@ export default defineNuxtConfig({
             htmlAttrs: { "data-theme": "luxury", lang: "en" },
             link: [
                 { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-                { rel: 'preconnect', href: 'https://fonts.gstatic.com' }
+                { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
+                { hid: "icon-svg", rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+                { hid: "icon-png", rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" }
             ]
         },
 

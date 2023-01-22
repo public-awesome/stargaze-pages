@@ -163,7 +163,6 @@ async function fetchNameInfo(name) {
 }
 useHead({
     title: nameInfo?.value?.name || "Stargaze Pages",
-
     meta: [
         { hid: 'og:title', name: 'og:title', content: nameInfo?.value?.name || "Stargaze Pages" },
         { hid: 'og:image', name: 'og:image', content: nameInfo?.value?.imageNFT },
