@@ -1,7 +1,9 @@
 <template v-once>
     <div v-if="nameInfo" class="flex flex-col justify-between min-h-screen items-center bg-black">
         <div class="w-screen max-w-auto h-full grow flex flex-col items-center justify-center p-2 ">
-            <a v-if="imageNft" class="m-4"><img v-if="imageNft" target="_blank" :src="imageNft" width="192" height="192"
+            <a v-if="imageNft" class="m-4"
+                :href="(nameInfo.addresses.stars ? 'https://www.stargaze.zone/profile/' + nameInfo.addresses.stars + '/all' : 'https://' + stargazeName + '.stars.page')"><img
+                    v-if="imageNft" target="_blank" :src="imageNft" width="192" height="192"
                     :alt="nameInfo.name + '\'s profile NFT'" class="w-48 rounded-md " /></a>
             <div
                 class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
@@ -79,11 +81,10 @@
             </div>
 
         </div>
-        <div class="m-4 text-center">
-            <p class="text-zinc-400 my-1 text-center">Made with 💜 by </p>
-            <a href="https://stargaze.zone" target="_blank"><img src="~/assets/stargaze.svg" width="124" height="30" />
-            </a>
-        </div>
+        <a class="m-4 text-center text-white border-pink-800 text-sm font-medium border-2 rounded-md p-2"
+            href="https://stargaze.zone/names">
+            Get your .stars.page, register Stargaze Name!
+        </a>
     </div>
     <div class="flex flex-col justify-between h-screen items-center bg-black" v-else>
         <div class="w-screen max-w-auto h-full  flex flex-col items-center justify-center p-2 ">
@@ -103,12 +104,10 @@
 
 
         </div>
-        <div class="m-4 text-center">
-            <p class="text-zinc-400 my-1 text-center">Made with 💜 by </p>
-            <a href="https://stargaze.zone" aria-label="Stargaze"><img src="~/assets/stargaze.svg" width="124"
-                    height="30" />
-            </a>
-        </div>
+        <a class="m-4 text-center text-white border-pink-800 text-sm font-medium border-2 rounded-md p-2"
+            href="https://stargaze.zone/names">
+            Get your .stars.page, register Stargaze Name!
+        </a>
     </div>
 </template>
 <script setup>
