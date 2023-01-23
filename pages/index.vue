@@ -1,6 +1,6 @@
 <template v-once>
     <div v-if="nameInfo" class="flex flex-col justify-between min-h-screen items-center bg-black">
-        <div class="w-screen max-w-auto h-full grow flex flex-col items-center justify-center p-2 ">
+        <div class="w-screen max-w-full h-full grow flex flex-col items-center justify-center p-2 ">
             <a v-if="imageNft" class="m-4"
                 :href="(nameInfo.addresses.stars ? 'https://www.stargaze.zone/profile/' + nameInfo.addresses.stars + '/all' : 'https://' + stargazeName + '.stars.page')"><img
                     v-if="imageNft" target="_blank" :src="imageNft" width="192" height="192"
@@ -66,12 +66,11 @@
             <div class="m-2 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white my-4 text-lg font-sans text-center"
                 v-if="createdNfts.length > 0">
                 Created collections:</div>
-            <div v-if="createdNfts.length > 0"
-                class="flex flex-row p-1 justify-center w-[200px] md:w-1/2 lg:w-1/3  flex-wrap">
+            <div v-if="createdNfts.length > 0" class="flex flex-row p-1 justify-center w-full max-w-[610px] flex-wrap">
 
                 <a v-for="createdNft in createdNfts" :key="createdNft.sg721_addr"
                     :href="'https://www.stargaze.zone/marketplace/' + createdNft.sg721_addr"
-                    class=" m-1 flex flex-col py-4 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors w-max">
+                    class=" m-1 flex flex-col py-4 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors w-full max-w-[30%] min-w-[190px]">
                     <nuxt-img :src="prefixToGateway(createdNft.image)" :alt="createdNft.name + 'collection preview'"
                         height="120" fit="cover" :modifiers="{ animated: true }" />
                     <p class="w-full mt-4"> {{
