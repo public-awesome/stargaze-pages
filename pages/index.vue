@@ -71,8 +71,9 @@
                 <a v-for="createdNft in createdNfts" :key="createdNft.sg721_addr"
                     :href="'https://www.stargaze.zone/marketplace/' + createdNft.sg721_addr"
                     class=" m-1 flex flex-col py-4 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors w-full max-w-[30%] min-w-[190px]">
-                    <nuxt-img :src="prefixToGateway(createdNft.image)" :alt="createdNft.name + 'collection preview'"
-                        height="120" fit="cover" :modifiers="{ animated: true }" />
+                    <nuxt-img v-if="createdNft && createdNft.image" :src="prefixToGateway(createdNft.image)"
+                        :alt="createdNft.name + 'collection preview'" height="120" fit="cover"
+                        :modifiers="{ animated: true }" />
                     <p class="w-full mt-4"> {{
                         createdNft.name
                     }}</p>
@@ -125,11 +126,13 @@ let createdNfts = await useFetch(`https://metabase.constellations.zone/api/publi
 
 function prefixToGateway(uri) {
     if (!uri) { return null }
-    let protocol = (["ipfs://", "ar://"]).find(p => uri.startsWith(p))
+    let protocol = (["ipfs://", "ar://", "https://", "http://"]).find(p => uri.startsWith(p))
     if (!protocol) { return null }
     let gateway = ({
         'ipfs://': 'https://ipfs-gw.stargaze-apis.com/ipfs/',
-        "ar://": "https://arweave.net/"
+        "ar://": "https://arweave.net/",
+        "https://": "https://",
+        "http://": "http://"
     })[protocol]
     let contentIdentifier = uri.slice(protocol.length)
     return gateway + contentIdentifier
@@ -160,7 +163,7 @@ async function fetchNameInfo(name) {
 
 }
 function copyClipboard(text) {
-    navigator.clipboard.writeText(text)
+    navigator.clipboard.writeText(text || "")
 }
 useHead({
     title: nameInfo?.value?.name || "Stargaze Pages",
