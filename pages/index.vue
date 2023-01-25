@@ -25,7 +25,7 @@
                     </svg>
                 </p>
             </a>
-            <a v-if="nameInfo.records.discord" href="https://discord.com" target="_blank"
+            <a v-if="nameInfo.records.discord" @click.prevent="copyClipboard(nameInfo.records.discord)"
                 class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
 
                 <img src="~/assets/discord.svg" class="h-6 w-6" width="180" height="180" />
@@ -158,6 +158,9 @@ async function fetchNameInfo(name) {
         verifiedRecordKeys: queryResponse.records.filter(r => r.verified).map(r => r.record_name)
     }
 
+}
+function copyClipboard(text) {
+    navigator.clipboard.writeText(text)
 }
 useHead({
     title: nameInfo?.value?.name || "Stargaze Pages",
