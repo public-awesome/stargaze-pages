@@ -26,7 +26,7 @@
                 </p>
             </a>
             <a v-if="nameInfo.records.discord" @click.prevent="copyClipboard(nameInfo.records.discord)"
-                class="w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
+                class="cursor-pointer w-full m-1 flex flex-row md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors">
 
                 <img src="~/assets/discord.svg" class="h-6 w-6" width="180" height="180" />
                 <p class="w-full "> {{
