@@ -68,8 +68,8 @@
                 Created collections:</div>
             <div v-if="createdNfts.length > 0" class="flex flex-row p-1 justify-center w-full max-w-[610px] flex-wrap">
 
-                <a v-for="createdNft in createdNfts" :key="createdNft.sg721_addr"
-                    :href="'https://www.stargaze.zone/marketplace/' + createdNft.sg721_addr"
+                <a v-for="createdNft in createdNfts" :key="createdNft.collection_addr"
+                    :href="createdNft.percent_minted == 1 ? ('https://www.stargaze.zone/marketplace/' + createdNft.collection_addr) : ('https://www.stargaze.zone/launchpad/' + createdNft.contract_addr)"
                     class=" m-1 flex flex-col py-4 items-center border-zinc-800 px-4 text-sm font-medium text-white border rounded-md font-sans text-center hover:bg-zinc-800 transition-colors w-full max-w-[30%] min-w-[190px]">
                     <nuxt-img v-if="createdNft && createdNft.image" :src="prefixToGateway(createdNft.image)"
                         :alt="createdNft.name + 'collection preview'" height="120" fit="cover"
@@ -77,6 +77,7 @@
                     <p class="w-full mt-4"> {{
                         createdNft.name
                     }}</p>
+                    <p v-if="createdNft.percent_minted != 1" class="text-xs pt-2 text-[#ec4899]">Not minted out yet</p>
                 </a>
             </div>
 
@@ -123,7 +124,7 @@ let imageNft = prefixToGateway(nameInfo?.value?.imageNFT)
 
 
 let createdNfts = await useFetch(`https://metabase.constellations.zone/api/public/card/a7be4444-f1f2-4da5-8bc7-edff96c736bd/query/json?parameters=%5B%7B%22type%22%3A%22category%22%2C%22value%22%3A%22${nameInfo.value?.stargazeAddress}%22%2C%22target%22%3A%5B%22variable%22%2C%5B%22template-tag%22%2C%22address%22%5D%5D%2C%22id%22%3A%229fc00a15-029c-0c64-2f06-ec1a67595dff%22%7D%5D`).then(fetchRes => fetchRes.data)
-
+console.log(createdNfts.value)
 function prefixToGateway(uri) {
     if (!uri) { return null }
     let protocol = (["ipfs://", "ar://", "https://", "http://"]).find(p => uri.startsWith(p))
