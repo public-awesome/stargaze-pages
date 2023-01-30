@@ -22,10 +22,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
           SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
 
-      - name: Install PM2
-        run: npm i pm2
-
       - name: Deploy
-        run: pm2 deploy ecosystem.config.js setup
+        run: npx pm2 deploy ecosystem.config.js setup
         # Or alternately, put this deploy script in your package.json's scripts and run it using yarn/npm:
         # run: yarn deploy
