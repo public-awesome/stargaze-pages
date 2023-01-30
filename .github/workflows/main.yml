@@ -24,5 +24,3 @@ jobs:
 
       - name: Deploy
         run: npx pm2 deploy ecosystem.config.js production setup
-        # Or alternately, put this deploy script in your package.json's scripts and run it using yarn/npm:
-        # run: yarn deploy
