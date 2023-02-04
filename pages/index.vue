@@ -107,7 +107,7 @@
         </div>
         <a class="m-4 text-center text-white border-pink-800 text-sm font-medium border-2 rounded-md p-2"
             href="https://stargaze.zone/names">
-            Get your .stars.page, register Stargaze Name!
+            Get your .stars.page, mint a Stargaze Name!
         </a>
     </div>
 </template>
