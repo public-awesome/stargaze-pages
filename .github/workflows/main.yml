@@ -23,6 +23,6 @@ jobs:
           SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
 
       - name: Deploy
-        run: npx pm2 deploy ecosystem.config.js production setup
+        run: npx pm2 deploy ecosystem.config.js production setup 
         env:
           SERVER_IP: ${{secrets.SERVER_IP}}
