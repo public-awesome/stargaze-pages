@@ -20,7 +20,7 @@ module.exports = {
             repo: 'https://github.com/public-awesome/stargaze-pages',
             path: '/root/stargaze-pages',
             'post-deploy':
-                'git fetch && git pull && yarn install && yarn build && pm2 reload ecosystem.config.js && pm2 save && git checkout yarn.lock',
+                'yarn install && yarn build && pm2 reload ecosystem.config.js && pm2 save && git checkout yarn.lock',
         },
     },
 }
