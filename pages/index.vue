@@ -120,7 +120,7 @@
 <script setup>
 
 import { toBech32, fromBech32 } from "@cosmjs/encoding"
-import { lookup as mimeLookup } from "mime-types";
+import mime from "mime/lite";
 
 let host = useState("hostname", () => (headers.host) || window.location.host)
 let stargazeName = shallowRef(host.value.split(".")[0])
@@ -151,7 +151,8 @@ async function fetchNameInfo(name) {
     let queryResponse = await useFetch(`https://info.stargaze.zone/api/v1/name/${name}.json`, { key: `name-${name}` }).then(fetchRes => fetchRes?.data?.value)
 
 
-    let imageNFTMime = mimeLookup(queryResponse.name.image_url)
+    let imageNFTMime = mime.getType(queryResponse.name.image_url)
+
 
     if (!queryResponse) {
         return null;
