@@ -15,6 +15,7 @@
   "dependencies": {
     "@cosmjs/encoding": "^0.29.5",
     "buffer": "^6.0.3",
+    "mime-types": "^2.1.35",
     "postcss-custom-properties": "^12.1.11"
   }
 }

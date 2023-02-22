@@ -3,10 +3,17 @@
         <div class="w-screen max-w-full h-full grow flex flex-col items-center justify-center p-2 ">
             <a v-if="imageNft" class="m-4"
                 :href="(nameInfo.addresses.stars ? 'https://www.stargaze.zone/profile/' + nameInfo.addresses.stars + '/all' : 'https://' + stargazeName + '.stars.page')"><img
-                    v-if="imageNft" target="_blank" :src="imageNft" width="192" height="192"
-                    :alt="nameInfo.name + '\'s profile NFT'" class="w-48 rounded-md " /></a>
-            <div
-                class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
+                    v-if="imageNft && nameInfo.imageNFTMime != 'video/mp4'" target="_blank" :src="imageNft" width="192"
+                    height="192" :alt="nameInfo.name + '\'s profile NFT'" class="w-48 rounded-md " /></a>
+            <a v-if="imageNft && nameInfo.imageNFTMime == 'video/mp4'" class="m-4"
+                :href="(nameInfo.addresses.stars ? 'https://www.stargaze.zone/profile/' + nameInfo.addresses.stars + '/all' : 'https://' + stargazeName + '.stars.page')">
+                <video height="192" :alt="nameInfo.name + '\'s profile NFT'" class="w-48 rounded-md " autoplay muted loop
+                    preload="auto">
+                    <source :src="imageNft" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </a>
+            <div class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
                 {{
                     nameInfo.name
                 }}</div>
@@ -90,8 +97,7 @@
     <div class="flex flex-col justify-between h-screen items-center bg-black" v-else>
         <div class="w-screen max-w-auto h-full  flex flex-col items-center justify-center p-2 ">
             <img src="~/assets/sad-face.svg" provider="ipx" class="w-48 rounded-md m-4" />
-            <div
-                class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
+            <div class="m-1 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 text-white mb-4 text-2xl font-semibold font-sans text-center">
                 No name found</div>
 
 
@@ -114,6 +120,7 @@
 <script setup>
 
 import { toBech32, fromBech32 } from "@cosmjs/encoding"
+import mime from "mime-types";
 
 let host = useState("hostname", () => (headers.host) || window.location.host)
 let stargazeName = shallowRef(host.value.split(".")[0])
@@ -144,7 +151,7 @@ async function fetchNameInfo(name) {
     let queryResponse = await useFetch(`https://info.stargaze.zone/api/v1/name/${name}.json`, { key: `name-${name}` }).then(fetchRes => fetchRes?.data?.value)
 
 
-
+    let imageNFTMime = mime.lookup(queryResponse.name.image_url)
 
     if (!queryResponse) {
         return null;
@@ -156,6 +163,7 @@ async function fetchNameInfo(name) {
         addresses: queryResponse.name.associated_addr ? Object.fromEntries(networks.map(network => [network, toBech32(network, fromBech32(queryResponse.name.associated_addr).data)])) : [],
         stargazeAddress: queryResponse.name.associated_addr,
         imageNFT: queryResponse.name.image_url,
+        imageNFTMime,
         records: queryResponse.records.reduce((pv, cv) => {
             return { ...pv, [cv.record_name]: cv.record_value }
         }, {}),
